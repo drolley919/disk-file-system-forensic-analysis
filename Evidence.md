@@ -1,19 +1,21 @@
 # Evidence Description
 
-The evidence examined consisted of a disk image containing an NTFS file system. Analysis was conducted using FTK Imager in a controlled forensic environment to preserve data integrity.
+The evidence examined consisted of a disk image containing an NTFS file system. Analysis was conducted using FTK Imager in a controlled forensic environment to preserve data integrity and prevent evidence contamination.
 
 ## Evidence Sources
 
-| Source | Description |
-|------|------------|
-| Disk Image | NTFS file system image analyzed using FTK Imager |
-| File Artifacts | User-created files and directories |
-| Metadata | NTFS timestamps and file attributes |
+| Source         | Description                                              |
+|----------------|----------------------------------------------------------|
+| Disk Image     | NTFS file system image analyzed using FTK Imager          |
+| File Artifacts | User-created files and directories                       |
+| Metadata       | NTFS timestamps and file attribute information            |
 
 ## Data Collection Methodology
 FTK Imager was used to mount and examine the disk image in a read-only state. No modifications were made to the original evidence. All findings were documented contemporaneously.
 
 ## Cryptographic Hash Verification
+
+Cryptographic hash verification was performed to ensure evidentiary integrity and to support independent validation of analysis results.
 
 ### Supporting Evidence – Hash File Import Validation
 
