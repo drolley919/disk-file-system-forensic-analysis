@@ -31,3 +31,8 @@ The proximity of timestamps and consistent NTFS metadata attributes suggest norm
 
 #### Supporting Evidence – Multiple User File Correlation (FTK Imager)
 ![FTK multiple user file metadata correlation](Assets/screenshots/ftk-multiple-user-files-metadata-correlation.png)
+
+## NTFS File System Structure Analysis
+
+### Supporting Evidence – NTFS Metadata and System Files
+![NTFS system file and hex analysis](Assets/screenshots/ntfs-system-files-and-hex-view.png)
