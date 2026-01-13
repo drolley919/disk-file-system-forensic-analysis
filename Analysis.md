@@ -3,8 +3,18 @@
 ## File System Overview
 The disk image was examined to identify the NTFS file system structure, including directories, user files, and system-generated artifacts.
 
-### User File Artifact Examination
+## Registry Artifact Analysis – Recent File Execution
+Windows Registry artifacts were examined to identify evidence of user interaction with recovered files. The `Recent File List` key associated with the WordPad application was reviewed to determine whether examined documents had been actively opened by the user.
 
+The registry entry confirmed that the file `Rolley.rtf` was accessed through WordPad, indicating intentional user interaction rather than passive file presence. This artifact supports file execution and user activity correlation within the examination timeframe.
+
+### Supporting Evidence – WordPad Recent File Registry Entry
+
+The following screenshot shows the Windows Registry location documenting recently accessed files within WordPad. The presence of `Rolley.rtf` confirms application-level interaction with the file.
+
+![WordPad Recent File Registry Artifact](Assets/screenshots/wordpad-recent-file-registry.png)
+
+ ### User File Artifact Examination
 During file system analysis, user-created documents were reviewed to identify artifacts of forensic relevance. The file `Devin.rtf` was identified within a user directory and examined using FTK Imager.
 
 The artifact contained user-generated content and displayed valid NTFS metadata, including created, modified, and accessed timestamps. File attributes and size information were consistent with a legitimate document created through normal user activity.
