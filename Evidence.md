@@ -17,6 +17,14 @@ FTK Imager was used to mount and examine the disk image in a read-only state. No
 
 Cryptographic hash verification was performed to ensure evidentiary integrity and to support independent validation of analysis results.
 
+### Supporting Evidence – Independent Hash Verification (PowerShell)
+
+To independently validate the integrity of the forensic image, cryptographic hash values were generated using PowerShell outside of the forensic analysis tool. This step confirms that the disk image remained unchanged during acquisition and analysis.
+
+The `Get-FileHash` cmdlet was used to compute both MD5 and SHA-1 hashes for the forensic image file (`Image_Project.E01`). The resulting hash values matched those recorded during initial acquisition, confirming evidentiary integrity and supporting defensibility.
+
+![Independent hash verification using PowerShell](Assets/screenshots/powershell-image-hash-verification.png)
+
 ### Supporting Evidence – Hash File Import Validation
 
 The following screenshot documents the import of the hash output CSV file into a spreadsheet application. Import settings, character encoding, and delimiters were reviewed to ensure accurate parsing of cryptographic hash values and file paths prior to analysis.
