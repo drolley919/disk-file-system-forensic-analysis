@@ -36,3 +36,39 @@ The proximity of timestamps and consistent NTFS metadata attributes suggest norm
 
 ### Supporting Evidence – NTFS Metadata and System Files
 ![NTFS system file and hex analysis](Assets/screenshots/ntfs-system-files-and-hex-view.png)
+
+## Suspicious Executable Identification (NTFS Root Directory)
+
+During file system analysis of the NTFS partition labeled `SECRET`, multiple files with non-descriptive, randomized filenames were identified. One file, `2z83nv8anfkvcj`, was examined in detail due to its unusual naming convention and location within the root directory.
+
+Hex-level analysis revealed the presence of the `MZ` file signature, confirming the file is a Windows Portable Executable (PE). The executable header was visible despite the absence of a standard `.exe` extension, indicating deliberate obfuscation of file type.
+
+File metadata showed the file was accessed during the examination timeframe and contained valid NTFS attributes, suggesting the file was present and accessible on the system rather than residual or corrupted data.
+
+### Supporting Evidence – Disguised Executable with PE Header (FTK Imager)
+
+![Disguised executable identified via hex analysis](Assets/screenshots/ftk-ntfs-root-executable-mz-header.png)
+
+### NTFS Metadata and Low-Level File Examination
+
+Further analysis was conducted on files with non-descriptive, system-generated names within the NTFS partition. The file `4iu4ns8vb1u02` was examined at the metadata and hex level using FTK Imager.
+
+NTFS metadata revealed consistent MFT timestamps for creation, modification, access, and entry change, indicating legitimate file system activity rather than artifact corruption. The file was not marked as sparse or temporary, and valid owner and group SIDs were present.
+
+Hex-level inspection revealed a valid executable header, confirming that the file contains structured binary data rather than random or unallocated content. This analysis supports the conclusion that the file represents a legitimate stored artifact within the file system.
+
+![NTFS metadata and hex-level file examination](Assets/screenshots/ntfs-metadata-hex-file-analysis.png)
+
+### NTFS Owner SID Attribution and User Correlation
+
+NTFS file ownership metadata was examined to determine the user account associated with files stored within the SECRET partition. The Owner SID extracted from the file system metadata was analyzed using FTK Imager.
+
+The identified SID was correlated with documented user-to-system mappings provided in the case reference material. This correlation confirmed that the file was owned by the user account associated with E. Grossman, mapped to workstation WIN-08-ZUNFW.
+
+This attribution links the file artifact to a specific user identity and system, strengthening conclusions regarding user activity and file ownership within the examined environment.
+
+![NTFS Owner SID correlation with user identity](Assets/screenshots/ntfs-owner-sid-user-correlation.png)
+
+Forensic image integrity was validated prior to analysis using MD5 and SHA1 hash verification within FTK Imager.
+
+Cryptographic hash values for identified files were independently validated using exported CSV data to confirm file integrity.
