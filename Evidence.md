@@ -40,5 +40,20 @@ The following screenshot shows MD5 and SHA-1 hash values recorded alongside the 
 ### Supporting Evidence – File Hash Verification (MD5 / SHA-1)
 ![File hash verification using CSV export](Assets/screenshots/file-hash-verification-md5-sha1-csv.png)
 
+### Supporting Evidence – Forensic Image Verification (FTK Imager)
+
+![Forensic image hash verification](Assets/screenshots/image-verification-md5-sha1-ftk.png)
+
+The forensic disk image (`Image_Project.E01`) was verified using FTK Imager.  
+Both MD5 and SHA1 hashes matched the stored verification values, confirming the integrity of the image and validating that no data alteration occurred after acquisition.
+
+### Supporting Evidence – File Hash Export and Validation (MD5 & SHA1)
+
+The following screenshot documents the review of cryptographic hash values exported from FTK Imager into a spreadsheet application. The CSV file contains MD5 and SHA1 hashes alongside full NTFS file paths for multiple files identified during analysis.
+
+This step supports independent verification of file integrity and demonstrates proper forensic validation procedures outside the primary forensic tool.
+
+![MD5 and SHA1 hash export validation](Assets/screenshots/csv-file-hash-export-validation.png)
+
 ## Integrity Considerations
 Evidence integrity was maintained by ensuring read-only access, documenting timestamps, and avoiding unnecessary system interaction during analysis.
