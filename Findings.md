@@ -50,8 +50,17 @@ Throughout the examination, no indicators of compromise were identified. Specifi
 
 Observed artifacts align with expected system and user behavior within a standard Windows operating environment.
 
----
+No integrity issues were identified; forensic image hash verification confirmed the evidence remained unchanged throughout analysis.
 
+An executable file was identified within the NTFS root directory using a non-standard filename and no file extension. Hex analysis confirmed the presence of a Windows PE header (`MZ`), indicating intentional obfuscation of executable content.
+
+Cryptographic hash validation confirmed the integrity of multiple files identified within the NTFS partition using both MD5 and SHA1 algorithms.
+
+Low-level NTFS analysis identified files with system-generated names that contained valid metadata, consistent timestamps, and structured binary content, indicating legitimate file system artifacts rather than corruption or random data.
+
+NTFS ownership analysis identified a specific user account associated with files located in the SECRET partition. Owner SID correlation linked the artifact to a documented user and workstation, enabling reliable user attribution.
+
+---
 ## Conclusion
 
 Based on file system analysis, registry artifact examination, metadata correlation, and cryptographic verification, the recovered artifacts reflect legitimate user-generated document activity. The findings support the conclusion that the examined files were intentionally created and accessed by the user and do not indicate malicious activity or system compromise.
