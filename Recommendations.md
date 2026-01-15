@@ -2,42 +2,42 @@
 
 ## Overview
 
-Based on the forensic examination of the NTFS file system and associated user activity artifacts, the following recommendations are provided to improve system visibility, data integrity assurance, and forensic readiness. While no malicious activity was identified, these recommendations reflect best practices aligned with enterprise security and incident response preparedness.
+Although no malicious activity was identified during this investigation, the analysis highlights opportunities to improve forensic visibility, evidence validation, and incident response readiness. The following recommendations are based on observed artifacts and align with best practices used in enterprise DFIR operations.
 
 ---
 
-## File System Monitoring and Auditing
+## Enhance File System Auditing and Monitoring
 
-Enable enhanced file system auditing for user directories to provide increased visibility into file creation, modification, and access events. Logging user-level file interactions supports faster triage and more accurate reconstruction of user activity during future investigations.
+Enable enhanced file system auditing for user-accessible directories to improve visibility into file creation, modification, and access events. Consistent logging of user-level file activity supports faster investigation and more accurate reconstruction of events during incident response scenarios.
 
-This capability is particularly valuable in incident response scenarios involving insider threats, data loss investigations, or suspected policy violations.
-
----
-
-## Registry Artifact Retention and Monitoring
-
-Maintain registry monitoring and retention policies that preserve application-level artifacts, such as recent file lists and execution history. These artifacts provide high-value evidence of intentional user interaction and application usage during forensic investigations.
-
-Centralized collection of registry-related telemetry can significantly reduce investigation time and improve correlation accuracy during live response operations.
+This capability is particularly valuable for detecting insider activity, policy violations, and data handling concerns.
 
 ---
 
-## Evidence Integrity and Hash Validation Practices
+## Strengthen Registry Artifact Retention and Telemetry
 
-Continue the use of cryptographic hashing (MD5 and SHA-1 or stronger algorithms such as SHA-256) during forensic acquisition and analysis to ensure evidentiary integrity. Documenting hash generation and validation processes supports defensibility, repeatability, and independent verification.
+Maintain retention of application-level registry artifacts, such as recent file lists and execution history. These artifacts provide high-confidence indicators of user interaction and application usage.
 
-Organizations should standardize hash verification procedures within forensic and incident response workflows.
+Centralized collection of registry telemetry can significantly reduce investigative time and improve correlation across endpoints during security incidents.
 
 ---
 
-## Forensic Readiness and Documentation
+## Standardize Evidence Integrity Verification Procedures
 
-Implement standardized forensic documentation templates and evidence handling procedures to ensure consistency across investigations. Clearly documenting acquisition methods, analysis steps, and validation processes improves organizational readiness and reduces investigative errors.
+Continue the use of cryptographic hash verification during forensic acquisition and analysis. Where possible, adopt stronger hashing algorithms (e.g., SHA-256) alongside legacy hashes to meet modern security standards.
 
-Regular training and tabletop exercises using forensic tools such as FTK Imager can further enhance analyst proficiency and response confidence.
+Standardized evidence integrity procedures improve defensibility, reproducibility, and confidence in investigative findings.
+
+---
+
+## Improve Forensic Readiness and Documentation Practices
+
+Implement standardized forensic documentation templates to ensure consistency across investigations. Clearly documenting acquisition methods, analysis steps, and validation procedures reduces investigative errors and improves collaboration between security and legal stakeholders.
+
+Regular training and validation exercises using forensic tools such as FTK Imager and native operating system utilities (e.g., PowerShell) further strengthen response capability.
 
 ---
 
 ## Conclusion
 
-Although no security incidents were identified during this examination, the investigation highlights the importance of proactive forensic readiness and visibility. Implementing the above recommendations would strengthen an organization’s ability to respond efficiently and accurately to future security events.
+This investigation demonstrates the importance of maintaining forensic readiness even in the absence of confirmed malicious activity. Proactive implementation of these recommendations will enhance an organization’s ability to respond efficiently, accurately, and defensibly to future security events.
