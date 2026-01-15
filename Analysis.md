@@ -1,74 +1,92 @@
 # Forensic Analysis
 
-This analysis focuses on identifying evidence of user interaction, file execution, and artifact consistency within the examined NTFS file system.
+This section documents the analytical process used to examine the NTFS file system and interpret recovered artifacts. The analysis focuses on identifying evidence of user activity, validating file interactions, and correlating artifacts to establish a coherent investigative narrative.
+
+---
 
 ## File System Overview
-The disk image was examined to identify the NTFS file system structure, including directories, user files, and system-generated artifacts.
 
-## Registry Artifact Analysis – Recent File Execution
-Windows Registry artifacts were examined to identify evidence of user interaction with recovered files. The `Recent File List` key associated with the WordPad application was reviewed to determine whether examined documents had been actively opened by the user.
+The disk image was examined to identify the NTFS file system structure, including system directories, user-created files, and system-generated artifacts.
 
-The registry entry confirmed that the file `Rolley.rtf` was accessed through WordPad, indicating intentional user interaction rather than passive file presence. This artifact supports file execution and user activity correlation within the examination timeframe. While registry artifacts alone do not confirm malicious activity, they provide strong supporting evidence of intentional user interaction with the file.
+Analysis focused on:
+- User directories
+- File metadata and timestamps
+- NTFS allocation status
+- System and application artifacts relevant to user interaction
 
-### Supporting Evidence – WordPad Recent File Registry Entry
+---
 
-The following screenshot shows the Windows Registry location documenting recently accessed files within WordPad. The presence of `Rolley.rtf` confirms application-level interaction with the file.
+## Registry Artifact Analysis – Recent File Activity
+
+Windows Registry artifacts were examined to determine whether recovered documents had been actively accessed by a user.
+
+The **WordPad Recent File List** registry key was reviewed to identify evidence of application-level interaction with recovered files.
+
+The presence of user-created Rich Text Format (RTF) documents within this registry key indicates intentional file access rather than passive file existence.
+
+---
+
+## Supporting Evidence – WordPad Recent File Registry Entry
+
+The following registry artifact confirms that the file **`Rolley.rtf`** was opened using WordPad.
+
+This finding supports:
+- Verified application execution
+- Direct user interaction with the document
+- Correlation between file system artifacts and registry activity
 
 ![WordPad Recent File Registry Artifact](Assets/screenshots/wordpad-recent-file-registry.png)
 
- ### User File Artifact Examination
-During file system analysis, user-created documents were reviewed to identify artifacts of forensic relevance. The file `Devin.rtf` was identified within a user directory and examined using FTK Imager.
+---
 
-The artifact contained user-generated content and displayed valid NTFS metadata, including created, modified, and accessed timestamps. File attributes and size information were consistent with a legitimate document created through normal user activity.
+## User File Artifact Examination
 
-#### Supporting Evidence – User File Metadata and Content (FTK Imager)
-![FTK user file metadata and content view](Assets/screenshots/ftk-user-file-metadata-devin-rtf.png)
+User-created documents were reviewed to identify artifacts of forensic relevance.
 
-### User Artifact Correlation and Timeline Consistency
+The file **`Devin.rtf`** was identified within the user directory and examined using FTK Imager. The file contained user-generated content and displayed valid NTFS metadata, including creation, modification, and access timestamps.
 
-Further examination of the user directory revealed multiple user-created Rich Text Format (RTF) files, including `Devin.rtf` and `Rolley.rtf`. These artifacts were located within the same directory and exhibited closely aligned creation and modification timestamps. Collectively, these findings indicate normal user-generated document activity rather than automated, malicious, or anomalous file creation.
-The proximity of timestamps and consistent NTFS metadata attributes suggest normal user activity rather than automated or malicious file creation. This correlation supports the conclusion that the files were generated during routine system use by the same user account.
+File attributes and size information were consistent with a legitimate document created through normal user activity.
 
-#### Supporting Evidence – Multiple User File Correlation (FTK Imager)
+---
+
+## Supporting Evidence – User File Metadata and Content
+
+The following screenshot documents the file metadata and content view for **`Devin.rtf`**, demonstrating:
+- Valid NTFS timestamps
+- User-generated document content
+- Consistency with expected file system behavior
+
+![FTK user file metadata and content](Assets/screenshots/ftk-user-file-metadata-devin-rtf.png)
+
+---
+
+## User Artifact Correlation and Timeline Consistency
+
+Further examination of the user directory revealed multiple user-created RTF files, including **`Devin.rtf`** and **`Rolley.rtf`**.
+
+These files:
+- Resided within the same directory
+- Exhibited closely aligned creation and modification timestamps
+- Displayed consistent NTFS metadata attributes
+
+This correlation supports the conclusion that the files were generated during routine system use by the same user account rather than through automated processes or malicious activity.
+
+---
+
+## Supporting Evidence – Multiple User File Correlation
+
+The following screenshot illustrates the correlation of multiple user-created documents and their associated metadata within FTK Imager.
+
 ![FTK multiple user file metadata correlation](Assets/screenshots/ftk-multiple-user-files-metadata-correlation.png)
 
-## NTFS File System Structure Analysis
+---
 
-### Supporting Evidence – NTFS Metadata and System Files
-![NTFS system file and hex analysis](Assets/screenshots/ntfs-system-files-and-hex-view.png)
+## Analytical Conclusion
 
-## Suspicious Executable Identification (NTFS Root Directory)
+The combined file system, registry, and metadata analysis supports the conclusion that:
+- User-created documents were actively accessed and modified
+- Application-level interaction occurred through WordPad
+- File timestamps and registry artifacts align consistently
+- No indicators of automated or malicious file creation were identified
 
-During file system analysis of the NTFS partition labeled `SECRET`, multiple files with non-descriptive, randomized filenames were identified. One file, `2z83nv8anfkvcj`, was examined in detail due to its unusual naming convention and location within the root directory.
-
-Hex-level analysis revealed the presence of the `MZ` file signature, confirming the file is a Windows Portable Executable (PE). The executable header was visible despite the absence of a standard `.exe` extension, indicating deliberate obfuscation of file type.
-
-File metadata showed the file was accessed during the examination timeframe and contained valid NTFS attributes, suggesting the file was present and accessible on the system rather than residual or corrupted data.
-
-### Supporting Evidence – Disguised Executable with PE Header (FTK Imager)
-
-![Disguised executable identified via hex analysis](Assets/screenshots/ftk-ntfs-root-executable-mz-header.png)
-
-### NTFS Metadata and Low-Level File Examination
-
-Further analysis was conducted on files with non-descriptive, system-generated names within the NTFS partition. The file `4iu4ns8vb1u02` was examined at the metadata and hex level using FTK Imager.
-
-NTFS metadata revealed consistent MFT timestamps for creation, modification, access, and entry change, indicating legitimate file system activity rather than artifact corruption. The file was not marked as sparse or temporary, and valid owner and group SIDs were present.
-
-Hex-level inspection revealed a valid executable header, confirming that the file contains structured binary data rather than random or unallocated content. This analysis supports the conclusion that the file represents a legitimate stored artifact within the file system.
-
-![NTFS metadata and hex-level file examination](Assets/screenshots/ntfs-metadata-hex-file-analysis.png)
-
-### NTFS Owner SID Attribution and User Correlation
-
-NTFS file ownership metadata was examined to determine the user account associated with files stored within the SECRET partition. The Owner SID extracted from the file system metadata was analyzed using FTK Imager.
-
-The identified SID was correlated with documented user-to-system mappings provided in the case reference material. This correlation confirmed that the file was owned by the user account associated with E. Grossman, mapped to workstation WIN-08-ZUNFW.
-
-This attribution links the file artifact to a specific user identity and system, strengthening conclusions regarding user activity and file ownership within the examined environment.
-
-![NTFS Owner SID correlation with user identity](Assets/screenshots/ntfs-owner-sid-user-correlation.png)
-
-Forensic image integrity was validated prior to analysis using MD5 and SHA1 hash verification within FTK Imager.
-
-Cryptographic hash values for identified files were independently validated using exported CSV data to confirm file integrity.
+These findings establish a clear pattern of legitimate user activity within the examined NTFS file system.
