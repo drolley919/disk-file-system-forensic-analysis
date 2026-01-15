@@ -1,59 +1,71 @@
-# Evidence Description
+# Evidence Overview
 
-The evidence examined consisted of a disk image containing an NTFS file system. Analysis was conducted using FTK Imager in a controlled forensic environment to preserve data integrity and prevent evidence contamination.
+This section documents the digital evidence examined during the forensic analysis and outlines the procedures used to preserve evidentiary integrity throughout the investigation.
+
+All analysis was conducted using forensically sound methods in a controlled environment to ensure that original evidence remained unaltered.
+
+---
+
+## Evidence Description
+
+The primary evidence consisted of a forensic disk image containing an NTFS file system. The image was analyzed in a read-only state to prevent modification of original data.
+
+---
 
 ## Evidence Sources
 
-| Source         | Description                                              |
-|----------------|----------------------------------------------------------|
-| Disk Image     | NTFS file system image analyzed using FTK Imager          |
-| File Artifacts | User-created files and directories                       |
-| Metadata       | NTFS timestamps and file attribute information            |
+| Evidence Type | Description |
+|-------------|-------------|
+| Disk Image | NTFS-formatted forensic disk image analyzed using FTK Imager |
+| File Artifacts | User-created files and directories recovered from the file system |
+| Metadata | NTFS timestamps, file attributes, and allocation data |
+
+---
 
 ## Data Collection Methodology
-FTK Imager was used to mount and examine the disk image in a read-only state. No modifications were made to the original evidence. All findings were documented contemporaneously.
+
+FTK Imager was used to mount and examine the disk image in a read-only state. No write operations were performed on the evidence during analysis.
+
+All findings were documented contemporaneously to maintain traceability and investigative accuracy.
+
+---
 
 ## Cryptographic Hash Verification
 
-Cryptographic hash verification was performed to ensure evidentiary integrity and to support independent validation of analysis results.
+Cryptographic hash values were used to verify the integrity of the forensic image and extracted artifacts.
 
-### Supporting Evidence – Independent Hash Verification (PowerShell)
+Hash verification ensured that evidence remained unchanged during acquisition, examination, and reporting phases.
 
-To independently validate the integrity of the forensic image, cryptographic hash values were generated using PowerShell outside of the forensic analysis tool. This step confirms that the disk image remained unchanged during acquisition and analysis.
+---
 
-The `Get-FileHash` cmdlet was used to compute both MD5 and SHA-1 hashes for the forensic image file (`Image_Project.E01`). The resulting hash values matched those recorded during initial acquisition, confirming evidentiary integrity and supporting defensibility.
+## Supporting Evidence – Hash File Import Validation
 
-![Independent hash verification using PowerShell](Assets/screenshots/powershell-image-hash-verification.png)
+A CSV file containing MD5 and SHA-1 hash values was imported into a spreadsheet application to validate file integrity outside of the forensic tool.
 
-### Supporting Evidence – Hash File Import Validation
+Import settings, character encoding, and delimiters were reviewed to ensure accurate parsing of hash values and full NTFS file paths.
 
-The following screenshot documents the import of the hash output CSV file into a spreadsheet application. Import settings, character encoding, and delimiters were reviewed to ensure accurate parsing of cryptographic hash values and file paths prior to analysis.
-
-This step helps prevent data corruption or misinterpretation when validating file integrity outside the forensic tool.
+This step reduces the risk of data corruption or misinterpretation when validating evidence integrity externally.
 
 ![CSV hash import validation](Assets/screenshots/csv-hash-import-validation.png)
 
-To preserve evidentiary integrity and support independent validation, cryptographic hash values were generated for selected user-created files. Hash values were exported and documented outside of the forensic tool to demonstrate reproducibility and integrity verification.
+---
 
-The following screenshot shows MD5 and SHA-1 hash values recorded alongside the full NTFS file path, enabling verification that the file contents remained unchanged during analysis.
+## Supporting Evidence – File Hash Verification (MD5 & SHA-1)
 
-### Supporting Evidence – File Hash Verification (MD5 / SHA-1)
-![File hash verification using CSV export](Assets/screenshots/file-hash-verification-md5-sha1-csv.png)
+Cryptographic hash values were generated for selected user-created files and recorded alongside their full NTFS file paths.
 
-### Supporting Evidence – Forensic Image Verification (FTK Imager)
+This validation confirms that file contents remained unchanged during analysis and supports independent verification of findings.
 
-![Forensic image hash verification](Assets/screenshots/image-verification-md5-sha1-ftk.png)
+![File hash verification](Assets/screenshots/file-hash-verification-md5-sha1-csv.png)
 
-The forensic disk image (`Image_Project.E01`) was verified using FTK Imager.  
-Both MD5 and SHA1 hashes matched the stored verification values, confirming the integrity of the image and validating that no data alteration occurred after acquisition.
+---
 
-### Supporting Evidence – File Hash Export and Validation (MD5 & SHA1)
+## Evidence Integrity Considerations
 
-The following screenshot documents the review of cryptographic hash values exported from FTK Imager into a spreadsheet application. The CSV file contains MD5 and SHA1 hashes alongside full NTFS file paths for multiple files identified during analysis.
+Evidence integrity was maintained by:
+- Enforcing read-only access to the forensic image
+- Verifying cryptographic hashes at multiple stages
+- Documenting timestamps and file attributes
+- Avoiding unnecessary system interaction
 
-This step supports independent verification of file integrity and demonstrates proper forensic validation procedures outside the primary forensic tool.
-
-![MD5 and SHA1 hash export validation](Assets/screenshots/csv-file-hash-export-validation.png)
-
-## Integrity Considerations
-Evidence integrity was maintained by ensuring read-only access, documenting timestamps, and avoiding unnecessary system interaction during analysis.
+These controls ensure that all conclusions are based on verifiable, unaltered evidence.
